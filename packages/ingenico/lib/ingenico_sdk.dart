@@ -83,6 +83,30 @@ class Session {
     return response.basicPaymentProduct!.cast<BasicPaymentProduct>();
   }
 
+
+ /// Gets all basicPaymentItems for a given payment context
+  ///
+  /// Can be used to see which payment product is available (Visa, Mastercard, Paypal ...)
+  /// See documentation [on the Ingenico website](https://epayments.developer-ingenico.com/documentation/sdk/mobile/android/#BasicPaymentItems)
+  Future<List<BasicPaymentProduct>> getBasicPaymentProducts2({
+    required double amountValue,
+    required String currencyCode,
+    required String countryCode,
+    required bool isRecurring,
+    required String debugSessionId
+  }) async {
+    final paymentContextRequest = PaymentContextRequest();
+    paymentContextRequest.amountValue = amountValue;
+    paymentContextRequest.currencyCode = currencyCode;
+    paymentContextRequest.countryCode = countryCode;
+    paymentContextRequest.isRecurring = isRecurring;
+    paymentContextRequest.sessionId = debugSessionId;
+
+    final response = await _api.getBasicPaymentItems(paymentContextRequest);
+
+    return response.basicPaymentProduct!.cast<BasicPaymentProduct>();
+  }
+
   /// Once the [PaymentProduct] have been selected by the user
   /// you can use this function to gather all the validation informatinons about the product
   ///
