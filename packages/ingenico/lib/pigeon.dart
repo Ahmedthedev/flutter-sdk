@@ -185,7 +185,6 @@ class BasicPaymentProduct {
   bool? allowsRecurring;
   bool? allowsTokenization;
   bool? usesRedirectionTo3rdParty;
-  DisplayHintsPaymentItem? displayHints;
 
   Object encode() {
     final Map<Object?, Object?> pigeonMap = <Object?, Object?>{};
@@ -197,7 +196,6 @@ class BasicPaymentProduct {
     pigeonMap['allowsRecurring'] = allowsRecurring;
     pigeonMap['allowsTokenization'] = allowsTokenization;
     pigeonMap['usesRedirectionTo3rdParty'] = usesRedirectionTo3rdParty;
-    pigeonMap['displayHints'] = displayHints == null ? null : displayHints!.encode();
     return pigeonMap;
   }
 
@@ -211,10 +209,7 @@ class BasicPaymentProduct {
       ..maxAmount = pigeonMap['maxAmount'] as double?
       ..allowsRecurring = pigeonMap['allowsRecurring'] as bool?
       ..allowsTokenization = pigeonMap['allowsTokenization'] as bool?
-      ..usesRedirectionTo3rdParty = pigeonMap['usesRedirectionTo3rdParty'] as bool?
-      ..displayHints = pigeonMap['displayHints'] != null
-          ? DisplayHintsPaymentItem.decode(pigeonMap['displayHints']!)
-          : null;
+      ..usesRedirectionTo3rdParty = pigeonMap['usesRedirectionTo3rdParty'] as bool?;
   }
 }
 
